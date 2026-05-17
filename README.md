@@ -70,7 +70,7 @@ If you need a **Google Images API alternative** that is fast to integrate and pr
 
 1. **Sign up** at [mungfali.net/signup](https://mungfali.net/signup) (250 free searches/month).
 2. Copy your API key from the [dashboard](https://mungfali.net/dashboard).
-3. Call the search endpoint:
+3. Call the search endpoint (example below), then parse the JSON `value` array and render `imageUrl` in your UI.
 
 ```bash
 curl -s -G "https://mungfali.net/v1/search" \
@@ -79,13 +79,11 @@ curl -s -G "https://mungfali.net/v1/search" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
-4. Parse the JSON `value` array and render `imageUrl` in your UI.
-
 ---
 
 ## Example request and response
 
-**Request**
+### Request
 
 ```http
 GET /v1/search?q=luxury+car&count=150 HTTP/1.1
@@ -94,7 +92,7 @@ Authorization: Bearer mng_your_api_key_here
 Accept: application/json
 ```
 
-**Response** `200 OK`
+### Response `200 OK`
 
 ```json
 {

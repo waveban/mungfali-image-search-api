@@ -2,8 +2,8 @@
 
 ## Supported versions
 
-| Version | Supported          |
-| ------- | -------------------- |
+| Version | Supported |
+| ------- | --------- |
 | 1.0.x   | :white_check_mark: |
 
 This repository documents the Mungfali Image Search API. Security fixes for the **hosted API** are applied on the server side; this repo receives documentation and client updates as needed.
@@ -14,7 +14,7 @@ This repository documents the Mungfali Image Search API. Security fixes for the 
 
 Instead, report them privately:
 
-1. Email **hello@mungfali.com** with subject line `Security: Mungfali Image Search API`.
+1. Email [hello@mungfali.com](mailto:hello@mungfali.com) with subject line `Security: Mungfali Image Search API`.
 2. Include a description of the issue, steps to reproduce, and impact assessment.
 3. If applicable, include proof-of-concept code or request/response samples **without** embedding live API keys.
 
