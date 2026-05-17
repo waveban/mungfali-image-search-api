@@ -1,0 +1,71 @@
+name: Bug Report
+description: Report incorrect documentation, broken examples, or SDK issues
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. This repo covers **docs and client libraries** for [Mungfali](https://mungfali.net).
+        For live API or billing issues, email hello@mungfali.com.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What went wrong?
+      description: Describe the bug clearly.
+      placeholder: The Python SDK example fails when per_page is omitted...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Clone repo
+        2. Run example in examples/python.md
+        3. See error...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - README / docs
+        - OpenAPI spec
+        - SDK (PHP)
+        - SDK (Python)
+        - SDK (Node.js)
+        - SDK (Go)
+        - Examples
+        - Postman collection
+        - CI / GitHub Actions
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Repo version or commit
+      placeholder: v1.0.0 or abc1234
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Do not paste API keys.
+    validations:
+      required: false

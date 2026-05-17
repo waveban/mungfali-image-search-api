@@ -1,0 +1,184 @@
+{
+  "info": {
+    "_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "name": "Mungfali Image Search API",
+    "description": "Official Postman collection for the Mungfali Image Search API.\n\nSet the `api_key` collection variable to your key from https://mungfali.net/dashboard",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{api_key}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://mungfali.net"
+    },
+    {
+      "key": "api_key",
+      "value": "mng_your_api_key_here"
+    }
+  ],
+  "item": [
+    {
+      "name": "Search",
+      "item": [
+        {
+          "name": "Search images (basic)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/search?q=electric+car",
+              "host": ["{{base_url}}"],
+              "path": ["v1", "search"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "electric car",
+                  "description": "Required search query"
+                }
+              ]
+            },
+            "description": "Basic image search with required parameter `q`."
+          },
+          "response": []
+        },
+        {
+          "name": "Search images (paginated)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/search?q=mountain+landscape&page=1&per_page=20",
+              "host": ["{{base_url}}"],
+              "path": ["v1", "search"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "mountain landscape"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Paginated search with page and per_page."
+          },
+          "response": []
+        },
+        {
+          "name": "Search images (SafeSearch strict)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/search?q=office+workspace&safeSearch=strict&filterTransparent=true",
+              "host": ["{{base_url}}"],
+              "path": ["v1", "search"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "office workspace"
+                },
+                {
+                  "key": "safeSearch",
+                  "value": "strict"
+                },
+                {
+                  "key": "filterTransparent",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Errors (examples)",
+      "item": [
+        {
+          "name": "Missing query (400)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{api_key}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/search",
+              "host": ["{{base_url}}"],
+              "path": ["v1", "search"]
+            },
+            "description": "Demonstrates invalid_request when `q` is omitted."
+          },
+          "response": []
+        },
+        {
+          "name": "Invalid API key (401)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "mng_invalid_key",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/search?q=test",
+              "host": ["{{base_url}}"],
+              "path": ["v1", "search"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "test"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

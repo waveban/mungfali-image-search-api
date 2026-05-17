@@ -1,0 +1,46 @@
+name: Feature Request
+description: Suggest documentation, SDK, or tooling improvements
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Suggest improvements to this documentation repository. For new API capabilities on mungfali.net, describe the use case — product requests are routed separately.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: What are you trying to accomplish?
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: How should docs, SDKs, or examples change?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - New language example
+        - New SDK language
+        - OpenAPI / API reference
+        - Postman collection
+        - Developer guides
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+    validations:
+      required: false
