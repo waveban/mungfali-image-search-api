@@ -12,8 +12,7 @@ const client = new MungfaliClient(process.env.MUNGfALI_API_KEY);
 
 async function main() {
   const data = await client.search('electric car', {
-    page: 1,
-    per_page: 10,
+    count: 150,
     safeSearch: 'moderate',
   });
 
@@ -31,8 +30,7 @@ main().catch(console.error);
 const apiKey = process.env.MUNGfALI_API_KEY;
 const params = new URLSearchParams({
   q: 'electric car',
-  page: '1',
-  per_page: '10',
+  count: '150',
 });
 
 const response = await fetch(`https://mungfali.net/v1/search?${params}`, {

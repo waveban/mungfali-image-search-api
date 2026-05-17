@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Official SDK stubs for PHP, Python, Node.js, and Go.
 - Language examples (cURL, PHP, Python, Node.js, Go).
 - Postman collection with Bearer token authentication.
-- Documentation: authentication, search, pagination, errors, rate limits, and FAQ.
+- Documentation: authentication, search, errors, rate limits, and FAQ.
 - GitHub issue templates, CONTRIBUTING, CODE_OF_CONDUCT, and SECURITY policies.
 - Markdown lint GitHub Actions workflow.
 

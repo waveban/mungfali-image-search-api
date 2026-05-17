@@ -32,8 +32,7 @@ func NewClient(apiKey string) *Client {
 
 // SearchOptions configures a search request.
 type SearchOptions struct {
-	Page               int
-	PerPage            int
+	Count              int
 	SafeSearch         string
 	FilterTransparent  *bool
 }
@@ -51,13 +50,10 @@ type ImageResult struct {
 	AccentColor     string `json:"accentColor"`
 }
 
-// SearchResponse is the API JSON payload.
+// SearchResponse is the API JSON payload (no pagination).
 type SearchResponse struct {
-	Name    string        `json:"name"`
-	Value   []ImageResult `json:"value"`
-	Page    int           `json:"page"`
-	PerPage int           `json:"per_page"`
-	Total   int           `json:"total"`
+	Name  string        `json:"name"`
+	Value []ImageResult `json:"value"`
 }
 
 // Search executes GET /v1/search.
@@ -69,11 +65,8 @@ func (c *Client) Search(ctx context.Context, query string, opts SearchOptions) (
 
 	q := u.Query()
 	q.Set("q", query)
-	if opts.Page > 0 {
-		q.Set("page", strconv.Itoa(opts.Page))
-	}
-	if opts.PerPage > 0 {
-		q.Set("per_page", strconv.Itoa(opts.PerPage))
+	if opts.Count > 0 {
+		q.Set("count", strconv.Itoa(opts.Count))
 	}
 	if opts.SafeSearch != "" {
 		q.Set("safeSearch", opts.SafeSearch)

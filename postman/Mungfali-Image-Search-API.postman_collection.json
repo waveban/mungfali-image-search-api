@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "name": "Mungfali Image Search API",
-    "description": "Official Postman collection for the Mungfali Image Search API.\n\nSet the `api_key` collection variable to your key from https://mungfali.net/dashboard",
+    "description": "Official Postman collection for the Mungfali Image Search API.\n\n## Setup\n1. Import this file in Postman (**Import** → select this JSON).\n2. Open the collection → **Variables** tab.\n3. Set `api_key` to your key from https://mungfali.net/dashboard (prefix `mng_`).\n4. Save — Bearer auth uses `{{api_key}}` automatically.\n\nNo pagination: each search returns up to 150 images in one response.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "auth": {
@@ -22,7 +22,8 @@
     },
     {
       "key": "api_key",
-      "value": "mng_your_api_key_here"
+      "value": "",
+      "type": "secret"
     }
   ],
   "item": [
@@ -51,12 +52,12 @@
                 }
               ]
             },
-            "description": "Basic image search with required parameter `q`."
+            "description": "Basic image search with required parameter `q`. Returns up to 150 images — no pagination."
           },
           "response": []
         },
         {
-          "name": "Search images (paginated)",
+          "name": "Search images (count=150)",
           "request": {
             "method": "GET",
             "header": [
@@ -66,7 +67,7 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/v1/search?q=mountain+landscape&page=1&per_page=20",
+              "raw": "{{base_url}}/v1/search?q=mountain+landscape&count=150",
               "host": ["{{base_url}}"],
               "path": ["v1", "search"],
               "query": [
@@ -75,16 +76,13 @@
                   "value": "mountain landscape"
                 },
                 {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "per_page",
-                  "value": "20"
+                  "key": "count",
+                  "value": "150",
+                  "description": "Max images (1-150)"
                 }
               ]
             },
-            "description": "Paginated search with page and per_page."
+            "description": "Explicit count parameter (optional; default is 150)."
           },
           "response": []
         },

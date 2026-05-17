@@ -19,8 +19,7 @@ func main() {
 	client := mungfali.NewClient(os.Getenv("MUNGfALI_API_KEY"))
 
 	data, err := client.Search(context.Background(), "electric car", mungfali.SearchOptions{
-		Page:    1,
-		PerPage: 10,
+		Count: 150,
 	})
 	if err != nil {
 		panic(err)
@@ -51,8 +50,7 @@ func main() {
 	u, _ := url.Parse("https://mungfali.net/v1/search")
 	q := u.Query()
 	q.Set("q", "electric car")
-	q.Set("page", "1")
-	q.Set("per_page", "10")
+	q.Set("count", "150")
 	u.RawQuery = q.Encode()
 
 	req, _ := http.NewRequest(http.MethodGet, u.String(), nil)

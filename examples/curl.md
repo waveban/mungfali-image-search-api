@@ -15,13 +15,12 @@ curl -s -G "https://mungfali.net/v1/search" \
   -H "Accept: application/json"
 ```
 
-## Paginated search (page 1, 20 per page)
+## Search with count (up to 150)
 
 ```bash
 curl -s -G "https://mungfali.net/v1/search" \
   --data-urlencode "q=mountain landscape" \
-  --data-urlencode "page=1" \
-  --data-urlencode "per_page=20" \
+  --data-urlencode "count=150" \
   -H "Authorization: Bearer $MUNGfALI_API_KEY"
 ```
 
@@ -40,7 +39,6 @@ curl -s -G "https://mungfali.net/v1/search" \
 ```bash
 curl -s -G "https://mungfali.net/v1/search" \
   --data-urlencode "q=luxury car" \
-  --data-urlencode "per_page=3" \
   -H "Authorization: Bearer $MUNGfALI_API_KEY" | jq '.value[].imageUrl'
 ```
 
@@ -49,9 +47,6 @@ Expected shape (truncated):
 ```json
 {
   "name": "luxury car",
-  "value": [ { "imageUrl": "https://...", "hostUrl": "https://..." } ],
-  "page": 1,
-  "per_page": 3,
-  "total": 150
+  "value": [ { "imageUrl": "https://...", "hostUrl": "https://..." } ]
 }
 ```

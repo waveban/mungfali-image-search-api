@@ -28,7 +28,7 @@ When your monthly quota is used:
 ## Best practices
 
 1. **Cache** popular queries server-side with TTL aligned to your product needs.
-2. **Use pagination** (`per_page`) when the UI only needs a subset of images.
+2. **Use `count`** when you need fewer than 150 images in a single response.
 3. **Monitor** usage in the [dashboard](https://mungfali.net/dashboard).
 4. **Upgrade** before launch traffic spikes.
 

@@ -15,8 +15,7 @@ client = MungfaliClient(api_key=os.environ["MUNGfALI_API_KEY"])
 
 data = client.search(
     "electric car",
-    page=1,
-    per_page=10,
+    count=150,
     safe_search="moderate",
 )
 
@@ -34,7 +33,7 @@ API_KEY = os.environ["MUNGfALI_API_KEY"]
 
 response = requests.get(
     "https://mungfali.net/v1/search",
-    params={"q": "electric car", "page": 1, "per_page": 10},
+    params={"q": "electric car", "count": 150},
     headers={"Authorization": f"Bearer {API_KEY}", "Accept": "application/json"},
     timeout=30,
 )

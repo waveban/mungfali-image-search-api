@@ -20,16 +20,13 @@ class MungfaliClient:
         self,
         query: str,
         *,
-        page: int | None = None,
-        per_page: int | None = None,
+        count: int | None = None,
         safe_search: str | None = None,
         filter_transparent: bool | None = None,
     ) -> dict[str, Any]:
         params: dict[str, str] = {"q": query}
-        if page is not None:
-            params["page"] = str(page)
-        if per_page is not None:
-            params["per_page"] = str(per_page)
+        if count is not None:
+            params["count"] = str(count)
         if safe_search is not None:
             params["safeSearch"] = safe_search
         if filter_transparent is not None:

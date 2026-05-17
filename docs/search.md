@@ -2,7 +2,7 @@
 
 ## `GET /v1/search`
 
-Returns image results for a text query.
+Returns image results for a text query in a **single response** (up to 150 images). There is **no pagination**.
 
 **Base URL:** `https://mungfali.net`
 
@@ -11,15 +11,14 @@ Returns image results for a text query.
 | Parameter | Required | Description |
 |-----------|----------|-------------|
 | `q` | **Yes** | Search terms (URL-encoded). |
-| `page` | No | Page number, 1-based. Default `1`. |
-| `per_page` | No | Results per page, 1–150. Default `150`. |
+| `count` | No | Maximum images to return, 1–150. Default `150`. |
 | `safeSearch` | No | `off`, `moderate`, or `strict`. Default `moderate`. |
 | `filterTransparent` | No | When `true`, exclude transparent PNGs. Default `false`. |
 
 ## Example request
 
 ```http
-GET /v1/search?q=electric+car&per_page=10&page=1 HTTP/1.1
+GET /v1/search?q=electric+car&count=150 HTTP/1.1
 Host: mungfali.net
 Authorization: Bearer mng_your_api_key
 Accept: application/json
@@ -42,10 +41,7 @@ Accept: application/json
       "isTransparent": false,
       "accentColor": "2D5A27"
     }
-  ],
-  "page": 1,
-  "per_page": 10,
-  "total": 150
+  ]
 }
 ```
 
@@ -56,10 +52,7 @@ Accept: application/json
 | Field | Type | Description |
 |-------|------|-------------|
 | `name` | string | Normalized query |
-| `value` | array | Image result objects |
-| `page` | integer | Current page (when paginating) |
-| `per_page` | integer | Page size |
-| `total` | integer | Total results available (up to 150) |
+| `value` | array | Image result objects (up to 150) |
 
 ### Image object (`value[]`)
 
@@ -81,6 +74,5 @@ Full schema: [openapi.yaml](../openapi.yaml)
 
 ## Related
 
-- [Pagination](./pagination.md)
 - [Authentication](./authentication.md)
 - [Error codes](./error-codes.md)

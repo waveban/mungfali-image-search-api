@@ -14,7 +14,7 @@ body:
     attributes:
       label: What went wrong?
       description: Describe the bug clearly.
-      placeholder: The Python SDK example fails when per_page is omitted...
+      placeholder: The Python SDK example fails when the API key is missing...
     validations:
       required: true
 

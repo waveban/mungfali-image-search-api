@@ -27,7 +27,7 @@ By participating, you agree to abide by our [Code of Conduct](./CODE_OF_CONDUCT.
 ## Development tips
 
 - Run markdown lint locally: `npx markdownlint-cli2 "**/*.md"`
-- Keep OpenAPI, README, and `docs/` in sync when changing parameters or response shapes.
+- Keep OpenAPI, README, and `docs/` in sync when changing parameters or response shapes. The API does not support pagination — up to 150 results per request.
 - Use realistic JSON in examples; avoid placeholder domains that do not resolve.
 
 We appreciate your contributions.

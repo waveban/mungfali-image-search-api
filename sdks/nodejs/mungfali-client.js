@@ -15,13 +15,12 @@ class MungfaliClient {
 
   /**
    * @param {string} query
-   * @param {{ page?: number, per_page?: number, safeSearch?: string, filterTransparent?: boolean }} [opts]
+   * @param {{ count?: number, safeSearch?: string, filterTransparent?: boolean }} [opts]
    * @returns {Promise<Record<string, unknown>>}
    */
   async search(query, opts = {}) {
     const params = new URLSearchParams({ q: query });
-    if (opts.page != null) params.set('page', String(opts.page));
-    if (opts.per_page != null) params.set('per_page', String(opts.per_page));
+    if (opts.count != null) params.set('count', String(opts.count));
     if (opts.safeSearch) params.set('safeSearch', opts.safeSearch);
     if (opts.filterTransparent != null) {
       params.set('filterTransparent', opts.filterTransparent ? 'true' : 'false');

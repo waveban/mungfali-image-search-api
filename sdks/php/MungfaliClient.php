@@ -16,18 +16,15 @@ final class MungfaliClient
     }
 
     /**
-     * @param array{page?: int, per_page?: int, safeSearch?: string, filterTransparent?: bool} $options
+     * @param array{count?: int, safeSearch?: string, filterTransparent?: bool} $options
      * @return array<string, mixed>
      */
     public function search(string $query, array $options = []): array
     {
         $params = ['q' => $query];
 
-        if (isset($options['page'])) {
-            $params['page'] = (int) $options['page'];
-        }
-        if (isset($options['per_page'])) {
-            $params['per_page'] = (int) $options['per_page'];
+        if (isset($options['count'])) {
+            $params['count'] = (int) $options['count'];
         }
         if (isset($options['safeSearch'])) {
             $params['safeSearch'] = (string) $options['safeSearch'];

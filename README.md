@@ -16,7 +16,7 @@
 
 ## Product overview
 
-**Mungfali Image Search API** helps you add high-quality image search to apps, dashboards, and automation pipelines without expensive legacy providers. One `GET /v1/search` call can return up to **150** structured image objects — with optional pagination when you prefer smaller pages.
+**Mungfali Image Search API** helps you add high-quality image search to apps, dashboards, and automation pipelines without expensive legacy providers. One `GET /v1/search` call returns up to **150** structured image objects — **no pagination required**.
 
 Trusted by **5,000+ developers**. Average response time **~243 ms**. **250 free searches/month** — no credit card required.
 
@@ -44,10 +44,10 @@ Google does not offer a public “Google Images API” for general image search.
 | Capability | Mungfali | Google Custom Search API |
 |------------|----------|---------------------------|
 | Purpose-built image search | Yes | Partial (CSE configuration) |
-| Results per request | Up to 150 | Typically 10 per page |
+| Results per request | Up to 150 | Typically 10 per call |
 | Setup complexity | API key only | Search engine ID + API key |
 | Starting price | $0 (250 req/mo) | Pay-as-you-go + CSE limits |
-| Pagination model | Optional `page` / `per_page` or single bulk response | Required paging |
+| Pagination required | **No** | Yes |
 
 If you need a **Google Images API alternative** that is fast to integrate and priced for startups, Mungfali is designed for that workflow.
 
@@ -55,7 +55,7 @@ If you need a **Google Images API alternative** that is fast to integrate and pr
 
 ## Features
 
-- Up to **150** image results per search (single call or paginated)
+- Up to **150** image results per search in a **single call** (no pagination)
 - **SafeSearch** (`off`, `moderate`, `strict`)
 - **Transparent background filtering**
 - **Domain allow/block lists**
@@ -75,7 +75,7 @@ If you need a **Google Images API alternative** that is fast to integrate and pr
 ```bash
 curl -s -G "https://mungfali.net/v1/search" \
   --data-urlencode "q=electric car" \
-  --data-urlencode "per_page=20" \
+  --data-urlencode "count=150" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
@@ -88,7 +88,7 @@ curl -s -G "https://mungfali.net/v1/search" \
 **Request**
 
 ```http
-GET /v1/search?q=luxury+car&per_page=2&page=1 HTTP/1.1
+GET /v1/search?q=luxury+car&count=150 HTTP/1.1
 Host: mungfali.net
 Authorization: Bearer mng_your_api_key_here
 Accept: application/json
@@ -122,10 +122,7 @@ Accept: application/json
       "isTransparent": false,
       "accentColor": "1A1A2E"
     }
-  ],
-  "page": 1,
-  "per_page": 2,
-  "total": 150
+  ]
 }
 ```
 
@@ -153,8 +150,8 @@ Accept: application/json
 | Feature | **Mungfali** | Google Custom Search API | Bing Image Search API | SerpAPI |
 |---------|--------------|--------------------------|----------------------|---------|
 | Primary use | Image search | Web + image via CSE | Image search | Multi-engine SERP |
-| Typical results / call | **150** | ~10 (paginated) | 10–50 (tiered) | Varies by engine |
-| Pagination required for max results | Optional | Yes | Often | Yes |
+| Typical results / call | **150** | ~10 | 10–50 (tiered) | Varies by engine |
+| Pagination required | **No** | Yes | Often | Yes |
 | SafeSearch | Built-in | Limited | Yes | Varies |
 | Transparent PNG filter | Yes | No | No | No |
 | Starting price | **$0** (250/mo) | Pay-as-you-go + CSE | Paid tiers | Paid tiers |
@@ -174,7 +171,7 @@ Lightweight clients live under [`sdks/`](./sdks/). Each exposes `search(query, o
 require 'sdks/php/MungfaliClient.php';
 
 $client = new MungfaliClient(getenv('MUNGfALI_API_KEY'));
-$result = $client->search('mountain landscape', ['per_page' => 10]);
+$result = $client->search('mountain landscape', ['count' => 150]);
 foreach ($result['value'] as $image) {
     echo $image['imageUrl'] . PHP_EOL;
 }
@@ -186,7 +183,7 @@ foreach ($result['value'] as $image) {
 from mungfali_client import MungfaliClient
 
 client = MungfaliClient(api_key="mng_your_api_key")
-data = client.search("mountain landscape", per_page=10)
+data = client.search("mountain landscape", count=150)
 for image in data["value"]:
     print(image["imageUrl"])
 ```
@@ -197,7 +194,7 @@ for image in data["value"]:
 const { MungfaliClient } = require('./sdks/nodejs/mungfali-client');
 
 const client = new MungfaliClient(process.env.MUNGfALI_API_KEY);
-const data = await client.search('mountain landscape', { per_page: 10 });
+const data = await client.search('mountain landscape', { count: 150 });
 data.value.forEach((img) => console.log(img.imageUrl));
 ```
 
@@ -205,7 +202,7 @@ data.value.forEach((img) => console.log(img.imageUrl));
 
 ```go
 client := mungfali.NewClient(os.Getenv("MUNGfALI_API_KEY"))
-data, err := client.Search(ctx, "mountain landscape", mungfali.SearchOptions{PerPage: 10})
+data, err := client.Search(ctx, "mountain landscape", mungfali.SearchOptions{Count: 150})
 ```
 
 See [examples/](./examples/) for full cURL, PHP, Python, Node.js, and Go samples.
@@ -229,7 +226,6 @@ See [examples/](./examples/) for full cURL, PHP, Python, Node.js, and Go samples
 |-------|------|
 | Authentication | [docs/authentication.md](./docs/authentication.md) |
 | Search endpoint | [docs/search.md](./docs/search.md) |
-| Pagination | [docs/pagination.md](./docs/pagination.md) |
 | Error codes | [docs/error-codes.md](./docs/error-codes.md) |
 | Rate limits | [docs/rate-limits.md](./docs/rate-limits.md) |
 | FAQ | [docs/faq.md](./docs/faq.md) |
@@ -265,14 +261,6 @@ JSON with a query `name` and a `value` array of image objects. See [Search](./do
 ### How fast is the API?
 
 Average response time is under **300 ms** for typical queries.
-
----
-
-## Repository topics (suggested)
-
-When publishing on GitHub, add topics such as:
-
-`image-search-api` · `rest-api` · `google-images-api-alternative` · `bing-image-search-alternative` · `serpapi-alternative` · `json-api` · `developer-tools` · `saas` · `image-search` · `api-client`
 
 ---
 

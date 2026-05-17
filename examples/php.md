@@ -12,8 +12,7 @@ $apiKey = getenv('MUNGfALI_API_KEY') ?: 'mng_your_api_key_here';
 $client = new MungfaliClient($apiKey);
 
 $result = $client->search('electric car', [
-    'page' => 1,
-    'per_page' => 10,
+    'count' => 150,
     'safeSearch' => 'moderate',
 ]);
 
@@ -28,8 +27,7 @@ foreach ($result['value'] as $image) {
 <?php
 $query = http_build_query([
     'q' => 'electric car',
-    'page' => 1,
-    'per_page' => 10,
+    'count' => 150,
 ]);
 
 $ch = curl_init('https://mungfali.net/v1/search?' . $query);

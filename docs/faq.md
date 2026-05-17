@@ -24,9 +24,9 @@ Both work. Documentation standardizes on `Authorization: Bearer mng_...`. See [A
 
 `GET https://mungfali.net/v1/search` with required query parameter `q`.
 
-### Do I need pagination?
+### Does the API support pagination?
 
-No. You can retrieve up to 150 images in one call. Use `page` and `per_page` when you want smaller pages. See [Pagination](./pagination.md).
+**No.** Mungfali returns up to **150 images in one response**. Use the optional `count` parameter (1–150) to limit how many images are returned in that single call.
 
 ## Billing & limits
 
@@ -46,7 +46,7 @@ Paid plans start at **$19/month** for 10,000 requests. Effective cost is about *
 
 ### What keywords describe this API?
 
-image search API, REST image search, JSON image API, Bing alternative, SerpAPI alternative, affordable image search, developer image API.
+image search API, REST image search, JSON image API, Bing alternative, SerpAPI alternative, affordable image search, developer image API, no pagination image API.
 
 ### What fields are in each image result?
 
